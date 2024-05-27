@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Providers } from "./providers";
+import NavbarComponent from "@/app/components/commonComponents/navbarComponent/NavbarComponent";
+import FooterComponent from "@/app/components/commonComponents/footerComponent/FooterComponent";
+import ScrollToTop from "@/app/components/commonComponents/scrollToTopComponent/ScrollToTopComponent";
+import ScrollIndicator from "@/app/components/commonComponents/scrollIndicatorComponent/ScrollIndicatorComponent";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,9 +16,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const theme = "light";
+
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={theme}>
+      <body>
+        <Providers>
+          <ScrollIndicator />
+          <NavbarComponent />
+          <ScrollToTop />
+          {children}
+          <FooterComponent />
+        </Providers>
+      </body>
     </html>
   );
 }
